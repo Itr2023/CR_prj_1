@@ -2,21 +2,21 @@ import requests
 from bs4 import BeautifulSoup
 from fastapi import FastAPI
 
-# url = "https://news.ycombinator.com/item?id=34886766"
 
-app = FastAPI("Request_app")
+# url_1 = "https://news.ycombinator.com/item?id=34886766"
+
+app = FastAPI()
 
 
 @app.post("/comm_f")
-async def comm_f(url: str):
-    file = requests.get(url, stream=True)
-    filename = open(url.split("/")[-1], "wb").write(file.content)
-
+def comm_f(url):
     src = requests.get(url)
     soup = BeautifulSoup(src.text, "lxml")
     comm = soup.findAll("span", class_="commtext c00")
-    # print("All comments from url", url, comm_f)
+    # print("All comments from url=", url, comm)
     return comm
+    # with open('comm.json', 'w') as file:
+    #     json.dump(comm, file)
 
 
-# comm_f(url)
+# comm_f(url_1)
