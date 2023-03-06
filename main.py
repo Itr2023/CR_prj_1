@@ -12,7 +12,7 @@ url_1 = "https://news.ycombinator.com/item?id=34886766"
 app = FastAPI()
 
 
-@app.get("/comm_f")
+@app.get("/")
 def comm_f(url):
     # req = requests.get(url)
     # src = req.text
@@ -22,7 +22,7 @@ def comm_f(url):
     with open("index.html") as file:
         src = file.read()
 
-    soup = BeautifulSoup(src.strip("https://"), "lxml")
+    soup = BeautifulSoup(src, "lxml")
 
     url_1 = urlparse(
         "https://news.ycombinator.com/item?id=34886766", scheme="", allow_fragments=True
@@ -37,11 +37,11 @@ def comm_f(url):
     #     json.dump(text, file, indent=4,ensure_ascii=False)
     # print(text)
 
-    json_data = jsonable_encoder(text)
+    # json_data = jsonable_encoder(text)
     # print(json_data)
-    return JSONResponse({"item_id": url_1.query, "comments": comm_1})
+    # return JSONResponse({"item_id": url_1.query, "comments": comm_1})
+    return {"item_id": url_1.query, "comments": comm_1}
     # return JSONResponse(content=text)
     # return JSONResponse(content=json_data)
-
 
 # comm_f(url_1)
