@@ -9,11 +9,10 @@ from urllib.parse import urlparse
 
 url_1 = "https://news.ycombinator.com/item?id=34886766"
 
-# app = FastAPI()
-
-# @app.get("/comm_f")
+app = FastAPI()
 
 
+@app.get("/comm_f")
 def comm_f(url):
     # req = requests.get(url)
     # src = req.text
@@ -30,16 +29,19 @@ def comm_f(url):
     )
     # print(url_1.query)
     comm = soup.findAll("span", class_="commtext c00")
+    comm_1 = [i.text for i in comm]
 
-    # print(comm)
-    text = {"item_id": url_1.query, "comments": comm}
+    # print(comm_1)
+    text = {"item_id": url_1.query, "comments": comm_1}
     # with open(f"json_data.json", "w", encoding = "utf-8") as file:
     #     json.dump(text, file, indent=4,ensure_ascii=False)
-    print(text)
+    # print(text)
 
-    # json_data = jsonable_encoder(text)
+    json_data = jsonable_encoder(text)
     # print(json_data)
+    return JSONResponse({"item_id": url_1.query, "comments": comm_1})
     # return JSONResponse(content=text)
+    # return JSONResponse(content=json_data)
 
 
-comm_f(url_1)
+# comm_f(url_1)
