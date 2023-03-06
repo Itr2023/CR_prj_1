@@ -13,7 +13,7 @@ app = FastAPI()
 
 
 @app.get("/")
-def comm_f(url):
+def comm_f():
     # req = requests.get(url)
     # src = req.text
     # with open('index.html', 'w') as file:
